@@ -15,4 +15,4 @@ WEB_SVR = "www.agatha.com"
 # Mail Server
 MAIL_SVR = "agatha.com"
 MAIL_PROFILE = "postfix"
-DATA_EXFILTRATION_SIZE = 125000
+DATA_EXFILTRATION_SIZE = 12500000
