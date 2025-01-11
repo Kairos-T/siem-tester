@@ -22,4 +22,6 @@ def generate_phishing_campaign():
     date = now.strftime("%a %b %d %H:%M:%S %Y")
     message_id = f"<{now.strftime('%Y%m%d%H%M%S')}.1.1@{PHISHING_CAMPAIGN_DOMAIN}>"
     log_line = f"from=test@{PHISHING_CAMPAIGN_DOMAIN}, date={date}, to={MAIL_PROFILE}@{MAIL_SVR}, subject=Phishing Campaign traffic Generation, message_id={message_id}, body=Phishing Campaign traffic Generation"
-    os.system(f"/logger -t \"{MAIL_PROFILE}\" \"{log_line}\"")
+    os.system(f"logger -t \"{MAIL_PROFILE}\" \"{log_line}\"")
+    log("success", "Phishing campaign log generated")
+
