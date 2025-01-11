@@ -16,3 +16,6 @@ WEB_SVR = "www.agatha.com"
 MAIL_SVR = "agatha.com"
 MAIL_PROFILE = "postfix"
 DATA_EXFILTRATION_SIZE = 12500000
+PHISHING_IOC_SUBJ = "Important"
+PHISHING_IOC_BODY = "Dear customer, an important message is waiting for you. Please click the link below to view it:\n\n"
+PHISHING_CAMPAIGN_DOMAIN = ""
