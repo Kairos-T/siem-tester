@@ -11,7 +11,9 @@ SPLUNK_HOST = "www.agatha.com:8000"
 
 # Web Server
 WEB_SVR = "www.agatha.com"
-BAD_BOT_USER_AGENT = "sqlmap/1.3.11#stable (http://sqlmap.org)"
+# BAD_BOT_USER_AGENT = "sqlmap/1.3.11#stable (http://sqlmap.org)"
+SQLMAP_QUERY_PATH = "orderdetail.aspx?Id=1"
+WORD_LIST_PATH = "dataset/wordlist_mini.txt"
 
 # Mail Server
 MAIL_SVR = "agatha.com"

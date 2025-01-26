@@ -1,6 +1,6 @@
 import os
 from utils.console_logger import log
-from helpers.config import WEB_SVR, BAD_BOT_USER_AGENT
+from helpers.config import WEB_SVR, WORD_LIST_PATH, SQLMAP_QUERY_PATH
 
 
 def generate_benign():
@@ -11,9 +11,14 @@ def generate_benign():
     log("success", "Benign HTTP request sent")
 
 
-def badbot():
+def generate_badbot():
     '''
     Generates a HTTP request to the web server with a known bad bot user agent. This should trigger an alert.
     '''
-    os.system(f"curl -s -A \"{BAD_BOT_USER_AGENT}\" http://{WEB_SVR}")
+
+    word_list_dir = os.getcwd() + "/" + WORD_LIST_PATH
+    
+    os.system(f"sqlmap -u http://{WEB_SVR}/{SQLMAP_QUERY_PATH} --dbs --batch")
+    os.system(f"dirb http://{WEB_SVR} -r -S {word_list_dir}") 
+    
     log("success", "Bad bot HTTP request sent")

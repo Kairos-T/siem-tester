@@ -1,0 +1,15 @@
+.bash_history
+.bashrc
+.htaccess
+.bash_history
+admin
+authentication
+auth
+blog
+blogspot
+schemas
+view_cart
+version
+zoeken
+zorum
+zt

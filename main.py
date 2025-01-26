@@ -79,15 +79,17 @@ class WebServerProfile(BaseProfile):
         generate_benign()
 
     def run_tests(self):
-        from helpers.websvr import generate_brute_force, generate_sqli, generate_xss
+        from helpers.websvr import generate_badbot, generate_brute_force, generate_sqli, generate_xss
         if self.args.tests:
             for test in self.args.tests:
-                if test == 'brute_force':
+                if test == 'badbot':
+                    generate_badbot()
+                elif test == 'brute_force':
                     generate_brute_force()
                 elif test == 'sqli':
                     generate_sqli()
                 elif test == 'xss':
-                    generate_xss()
+                    generate_xss() 
                 else:
                     log("error", f"Test '{test}' not found.")
         else:
