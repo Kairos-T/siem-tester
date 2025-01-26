@@ -52,8 +52,3 @@ def generate_phishing_campaign():
     os.system(
         f"echo \"{PHISHING_CAMPAIGN_BODY}\" | mail -s \"Phishing Campaign traffic Generation\" -- {MAIL_PROFILE}@{MAIL_SVR}")
     log("success", "Phishing campaign email (2/2) sent")
-
-    # 2.
-    os.system(
-        f"echo \"{PHISHING_CAMPAIGN_BODY}\" | mail -s \"Phishing Campaign traffic Generation\" -- {MAIL_PROFILE}@{MAIL_SVR}")
-    log("success", "Phishing campaign email (2/2) sent")
