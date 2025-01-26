@@ -19,6 +19,6 @@ def generate_badbot():
     word_list_dir = os.getcwd() + "/" + WORD_LIST_PATH
     
     os.system(f"sqlmap -u http://{WEB_SVR}/{SQLMAP_QUERY_PATH} --dbs --batch")
-    os.system(f"dirb http://{WEB_SVR} -r -S {word_list_dir} -a dirb") 
+    os.system(f"dirb http://{WEB_SVR} {word_list_dir} -r -S -a dirb") 
     
     log("success", "Bad bot HTTP request sent")
