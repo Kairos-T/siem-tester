@@ -22,3 +22,13 @@ def generate_badbot():
     os.system(f"dirb http://{WEB_SVR} {word_list_dir} -r -S -a dirb") 
     
     log("success", "Bad bot HTTP request sent")
+
+def generate_unusual_pattern():
+    '''
+    Generates a large number of HTTP requests to the web server in a short period of time. This should trigger an alert.
+    '''
+    
+    os.system(f"ab -n 1000 -c 100 http://{WEB_SVR}/")
+    
+    log("success", "Unusual pattern HTTP request sent")
+    

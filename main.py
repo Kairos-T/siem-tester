@@ -5,7 +5,9 @@ from utils.console_logger import log
 
 class RawFormatter(argparse.HelpFormatter):
     def _fill_text(self, text, width, indent):
-        return "\n".join([textwrap.fill(line, width) for line in textwrap.indent(textwrap.dedent(text), indent).splitlines()])
+        return "\n".join(
+            [textwrap.fill(line, width) for line in textwrap.indent(textwrap.dedent(text), indent).splitlines()]
+        )
 
 
 def parse_arguments():
@@ -29,9 +31,11 @@ def parse_arguments():
             - sqli - Generates logs that reflect SQL injection attempts.
             - xss - Generates logs that reflect cross-site scripting attempts. 
             - badbot - Generates logs that reflect bad bot traffic.
+            - unusual_pattern - Generates logs that reflect unusual traffic patterns.
     '''
     parser = argparse.ArgumentParser(
-        description=program_description, formatter_class=RawFormatter)
+        description=program_description, formatter_class=RawFormatter
+    )
     parser.add_argument('-p', '--profile', type=str,
                         help='Specify profile of tests to run. Run -h for a list of profiles.')
     parser.add_argument('-b', '--benign', action='store_true',
@@ -46,80 +50,98 @@ class BaseProfile:
         self.args = args
 
     def run_benign(self):
+        """Run benign traffic generation."""
         raise NotImplementedError
 
     def run_tests(self):
+        """Run specific tests."""
         raise NotImplementedError
 
 
 class MailServerProfile(BaseProfile):
+    BENIGN_FUNCTION = 'generate_benign'
+    TEST_FUNCTIONS = {
+        'data_exfiltration': 'generate_data_exfiltration',
+        'phishing_ioc': 'generate_phishing_ioc',
+        'phishing_campaign': 'generate_phishing_campaign',
+    }
+
     def run_benign(self):
         from helpers.mailsvr import generate_benign
         generate_benign()
 
     def run_tests(self):
-        from helpers.mailsvr import generate_data_exfiltration, generate_phishing_ioc, generate_phishing_campaign
-        if self.args.tests:
-            for test in self.args.tests:
-                if test == 'data_exfiltration':
-                    generate_data_exfiltration()
-                elif test == 'phishing_ioc':
-                    generate_phishing_ioc()
-                elif test == 'phishing_campaign':
-                    generate_phishing_campaign()
-                else:
-                    log("error", f"Test '{test}' not found.")
-        else:
-            log("warning", "No tests specified.")
+        from helpers.mailsvr import (
+            generate_data_exfiltration,
+            generate_phishing_ioc,
+            generate_phishing_campaign,
+        )
+
+        for test in self.args.tests or []:
+            function_name = self.TEST_FUNCTIONS.get(test)
+            if function_name:
+                locals()[function_name]()  # Dynamically call the test function
+            else:
+                log("error", f"Test '{test}' not found.")
 
 
 class WebServerProfile(BaseProfile):
+    BENIGN_FUNCTION = 'generate_benign'
+    TEST_FUNCTIONS = {
+        'badbot': 'generate_badbot',
+        'unusual_pattern': 'generate_unusual_pattern',
+        # 'brute_force': 'generate_brute_force',
+        # 'sqli': 'generate_sqli',
+        # 'xss': 'generate_xss',
+    }
+
     def run_benign(self):
         from helpers.websvr import generate_benign
         generate_benign()
 
     def run_tests(self):
-        from helpers.websvr import generate_badbot, generate_brute_force, generate_sqli, generate_xss
-        if self.args.tests:
-            for test in self.args.tests:
-                if test == 'badbot':
-                    generate_badbot()
-                elif test == 'brute_force':
-                    generate_brute_force()
-                elif test == 'sqli':
-                    generate_sqli()
-                elif test == 'xss':
-                    generate_xss() 
-                else:
-                    log("error", f"Test '{test}' not found.")
-        else:
-            log("warning", "No tests specified.")
+        from helpers.websvr import (
+            generate_badbot,
+            generate_unusual_pattern,
+            # generate_brute_force,
+            # generate_sqli,
+            # generate_xss,
+        )
+
+        for test in self.args.tests or []:
+            function_name = self.TEST_FUNCTIONS.get(test)
+            if function_name:
+                locals()[function_name]()  # Dynamically call the test function
+            else:
+                log("error", f"Test '{test}' not found.")
 
 
 def main():
     args = parse_arguments()
 
+    PROFILE_CLASSES = {
+        'mailsvr': MailServerProfile,
+        'websvr': WebServerProfile,
+    }
+
     if not args.profile:
         log("error", "Please specify a profile to run. Run -h for help.")
         exit()
 
-    profile = None
-    if args.profile == 'mailsvr':
-        profile = MailServerProfile(args)
-    elif args.profile == 'websvr':
-        profile = WebServerProfile(args)
-    elif args.profile == 'all':
+    if args.profile == 'all':
         log("info", "Running all benign log generation events...")
-    else:
-        log("error",
-            f"Profile '{args.profile}' not recognised. Please specify a valid profile or run -h for help.")
-        exit()
-
-    if profile:
+        for profile_class in PROFILE_CLASSES.values():
+            profile = profile_class(args)
+            profile.run_benign()
+    elif args.profile in PROFILE_CLASSES:
+        profile = PROFILE_CLASSES[args.profile](args)
         if args.benign:
             profile.run_benign()
         else:
             profile.run_tests()
+    else:
+        log("error", f"Profile '{args.profile}' not recognised. Please specify a valid profile or run -h for help.")
+        exit()
 
 
 if __name__ == '__main__':
