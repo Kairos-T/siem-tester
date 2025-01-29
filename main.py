@@ -151,6 +151,7 @@ def main():
     PROFILE_CLASSES = {
         'mailsvr': MailServerProfile,
         'websvr': WebServerProfile,
+        'winhost': WindowsHostProfile,
     }
 
     if not args.profile:
