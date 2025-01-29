@@ -20,6 +20,7 @@ def parse_arguments():
         - all - Run all benign log generation events.
         - mailsvr - Simulates traffic to a mail server.
         - websvr - Simulates traffic to an IIS web server.
+        - winhost - Simulates traffic from a Windows host.
     
     Tests and intended profiles:
         mailsvr:
@@ -32,6 +33,10 @@ def parse_arguments():
             - xss - Generates logs that reflect cross-site scripting attempts. 
             - badbot - Generates logs that reflect bad bot traffic.
             - unusual_pattern - Generates logs that reflect unusual traffic patterns.
+            - web_defacement - Generates logs that reflect web defacement.
+        winhost:
+            - malware - Generates logs that reflect malware/c2 communication.
+            - phishing - Generates logs that reflect phishing attempts.
     '''
     parser = argparse.ArgumentParser(
         description=program_description, formatter_class=RawFormatter
@@ -117,6 +122,28 @@ class WebServerProfile(BaseProfile):
             else:
                 log("error", f"Test '{test}' not found.")
 
+class WindowsHostProfile(BaseProfile):
+    BENIGN_FUNCTION = 'generate_benign'
+    TEST_FUNCTIONS = {
+        'malware': 'generate_malware',
+        'phishing': 'generate_phishing',
+    }
+
+    def run_benign(self):
+        log("info", "No benign traffic generation for Windows host profile.")
+
+    def run_tests(self):
+        from helpers.winhost import (
+            generate_malware,
+            generate_phishing,
+        )
+
+        for test in self.args.tests or []:
+            function_name = self.TEST_FUNCTIONS.get(test)
+            if function_name:
+                locals()[function_name]()  # Dynamically call the test function
+            else:
+                log("error", f"Test '{test}' not found.")
 
 def main():
     args = parse_arguments()

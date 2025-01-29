@@ -25,3 +25,6 @@ PHISHING_IOC_SUBJ = "Important"
 PHISHING_IOC_BODY = "Dear customer, an important message is waiting for you. Please click the link below to view it:\n\n"
 PHISHING_CAMPAIGN_DOMAIN = "duckdns.org"
 PHISHING_CAMPAIGN_BODY = "Dear customer, please click the link below: helmutz.com.15-235-9-25.cprapid.com"
+
+# Win Host
+C2_DOMAIN = "guardeduppe.com"
