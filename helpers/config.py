@@ -28,3 +28,4 @@ PHISHING_CAMPAIGN_BODY = "Dear customer, please click the link below: helmutz.co
 
 # Win Host
 C2_DOMAIN = "guardeduppe.com"
+PHISHING_DOMAIN = "agcyber.com"
