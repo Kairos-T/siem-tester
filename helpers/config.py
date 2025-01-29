@@ -1,6 +1,10 @@
+from datetime import datetime
 #########################
 # Global Configurations #
 #########################
+
+now = datetime.now()
+date_time = now.strftime("%Y-%m-%d %H:%M:%S")
 
 TENANT_NAME = "agatha.com"
 SPLUNK_HOST = "www.agatha.com:8000"
@@ -14,8 +18,8 @@ WEB_SVR = "www.agatha.com"
 # BAD_BOT_USER_AGENT = "sqlmap/1.3.11#stable (http://sqlmap.org)"
 SQLMAP_QUERY_PATH = "orderdetail.aspx?Id=1"
 WORD_LIST_PATH = "dataset/wordlist_mini.txt"
-PATH_TO_WD_DATA = r'C:\PATH\TO\gib-intel\data\web_defacements.csv'
-WEB_DEFACEMENT_ENTRY = "https://iuat.agatha.com,2025-01-28 15:48:36"
+PATH_TO_WD_DATA = r'C:\Users\Administrator\Documents\gib-intel\data\web_defacements.csv'
+WEB_DEFACEMENT_ENTRY = f"https://iuat.agatha.com,{date_time}"
 
 # Mail Server
 MAIL_SVR = "agatha.com"
