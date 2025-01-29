@@ -1,6 +1,6 @@
 import os
 from utils.console_logger import log
-from helpers.config import WEB_SVR, WORD_LIST_PATH, SQLMAP_QUERY_PATH
+from helpers.config import WEB_SVR, WORD_LIST_PATH, SQLMAP_QUERY_PATH, PATH_TO_WD_DATA, WEB_DEFACEMENT_ENTRY
 
 
 def generate_benign():
@@ -32,3 +32,9 @@ def generate_unusual_pattern():
     
     log("success", "Unusual pattern HTTP request sent")
     
+def generate_web_defacement():
+    '''
+    Adds entry to the web defacement log. This should trigger an alert. (Run on IIS server)
+    '''
+    os.system(f"echo {WEB_DEFACEMENT_ENTRY} >> {PATH_TO_WD_DATA}")
+    log("success", "Web defacement report added")

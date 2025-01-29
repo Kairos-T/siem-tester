@@ -90,6 +90,7 @@ class WebServerProfile(BaseProfile):
     TEST_FUNCTIONS = {
         'badbot': 'generate_badbot',
         'unusual_pattern': 'generate_unusual_pattern',
+        'web_defacement': 'generate_web_defacement',
         # 'brute_force': 'generate_brute_force',
         # 'sqli': 'generate_sqli',
         # 'xss': 'generate_xss',
@@ -103,6 +104,7 @@ class WebServerProfile(BaseProfile):
         from helpers.websvr import (
             generate_badbot,
             generate_unusual_pattern,
+            generate_web_defacement,
             # generate_brute_force,
             # generate_sqli,
             # generate_xss,

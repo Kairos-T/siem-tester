@@ -14,6 +14,8 @@ WEB_SVR = "www.agatha.com"
 # BAD_BOT_USER_AGENT = "sqlmap/1.3.11#stable (http://sqlmap.org)"
 SQLMAP_QUERY_PATH = "orderdetail.aspx?Id=1"
 WORD_LIST_PATH = "dataset/wordlist_mini.txt"
+PATH_TO_WD_DATA = r'C:\PATH\TO\gib-intel\data\web_defacements.csv'
+WEB_DEFACEMENT_ENTRY = "https://iuat.agatha.com,2025-01-28 15:48:36"
 
 # Mail Server
 MAIL_SVR = "agatha.com"
