@@ -96,9 +96,9 @@ class WebServerProfile(BaseProfile):
         'badbot': 'generate_badbot',
         'unusual_pattern': 'generate_unusual_pattern',
         'web_defacement': 'generate_web_defacement',
-        # 'brute_force': 'generate_brute_force',
-        # 'sqli': 'generate_sqli',
-        # 'xss': 'generate_xss',
+        'brute_force': 'generate_brute_force',
+        'sqli': 'generate_sqli',
+        'xss': 'generate_xss',
     }
 
     def run_benign(self):
@@ -110,9 +110,9 @@ class WebServerProfile(BaseProfile):
             generate_badbot,
             generate_unusual_pattern,
             generate_web_defacement,
-            # generate_brute_force,
-            # generate_sqli,
-            # generate_xss,
+            generate_brute_force,
+            generate_sqli,
+            generate_xss,
         )
 
         for test in self.args.tests or []:
