@@ -2,6 +2,7 @@ from colorama import Fore, Style, init
 
 init(autoreset=True)
 
+
 def log(level, message):
     if level == "info":
         print(f"[{Fore.BLUE}*{Style.RESET_ALL}] {message}")

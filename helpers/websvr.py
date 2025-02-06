@@ -10,7 +10,7 @@ from helpers.config import (
     WEB_SVR_USER,
     WEB_SVR_LOGIN_PATH,
     HYDRA_FAILURE_MSG,
-    XSS_PAYLOADS
+    XSS_PAYLOADS,
 )
 
 
@@ -85,12 +85,22 @@ def generate_sqli():
         os.system(f"sqlmap -u {target_url} {cmd}")
     log("success", "SQLi attack simulations completed")
 
+
 def generate_xss():
     """
     Generates logs that reflect cross-site scripting attempts.
     """
     for payload in XSS_PAYLOADS:
-        encoded_payload = payload.replace(" ", "%20").replace("<", "%3C").replace(">", "%3E").replace("\"", "%22").replace("'", "%27").replace("=", "%3D")
-        os.system(f"curl -G http://{WEB_SVR} --data-urlencode 'ctl00$BodyContentPlaceholder$txt_email={encoded_payload}'")
+        encoded_payload = (
+            payload.replace(" ", "%20")
+            .replace("<", "%3C")
+            .replace(">", "%3E")
+            .replace('"', "%22")
+            .replace("'", "%27")
+            .replace("=", "%3D")
+        )
+        os.system(
+            f"curl -G http://{WEB_SVR} --data-urlencode 'ctl00$BodyContentPlaceholder$txt_email={encoded_payload}'"
+        )
 
     log("success", "XSS attack simulations completed")
