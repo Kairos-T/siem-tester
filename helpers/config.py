@@ -6,7 +6,7 @@ from datetime import datetime
 now = datetime.now()
 date_time = now.strftime("%Y-%m-%d %H:%M:%S")
 
-TENANT_NAME = "agatha.com"
+TENANT_DOMAIN = "agatha.com"
 SPLUNK_HOST = "www.agatha.com:8000"
 
 ##################################
@@ -17,9 +17,10 @@ SPLUNK_HOST = "www.agatha.com:8000"
 WEB_SVR = "www.agatha.com"
 # BAD_BOT_USER_AGENT = "sqlmap/1.3.11#stable (http://sqlmap.org)"
 SQLMAP_QUERY_PATH = "orderdetail.aspx?Id=1"
-WORD_LIST_PATH = "dataset/wordlist_mini.txt"
+DIR_WORD_LIST_PATH = "dataset/directory_wordlist_mini.txt"
 PATH_TO_WD_DATA = r'C:\Users\Administrator\Documents\gib-intel\data\web_defacements.csv'
 WEB_DEFACEMENT_ENTRY = f"https://iuat.agatha.com,{date_time}"
+PW_WORD_LIST_PATH = "dataset/password_wordlist_mini.txt"
 
 # Mail Server
 MAIL_SVR = "agatha.com"
