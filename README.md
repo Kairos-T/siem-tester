@@ -130,36 +130,6 @@ This program is intended to run on various operating systems, including Windows 
 
 ## Program Guide
 
-### Profiles
-
-| Profiles | Description                                        |
-| -------- | -------------------------------------------------- |
-| all      | (LINUX ONLY) Runs all benign log generation events |
-| websvr   | Simulates traffic to a mail server                 |
-| mailsvr  | Simulates traffic to an IIS web server             |
-
-### Options
-
-| Options   | Description                                             |
-| --------- | ------------------------------------------------------- |
-| --tests   | Specify the tests to run (space delimited)              |
-| --profile | Specify the profile to run                              |
-| -b        | Run benign log generation events for a specific profile |
-
-### Tests
-
-| Profile | Tests             | Description                                                                                  |
-| ------- | ----------------- | -------------------------------------------------------------------------------------------- |
-| mailsvr | data_exfiltration | Generates logs that reflect large volumes of data being transferred through the mail server. |
-| mailsvr | phishing_ioc      | Sends emails with known phishing indicators.                                                 |
-| mailsvr | phishing_campaign | Sends emails containing links to, or originating from blacklisted domains/URLs.              |
-| websvr  | brute_force       | Generates logs that reflect multiple failed login attempts.                                  |
-| websvr  | sqli              | Generates logs that reflect SQL injection attempts.                                          |
-| websvr  | xss               | Generates logs that reflect cross-site scripting attempts.                                   |
-| websvr  | badbot            | Generates logs that reflect bad bot traffic.                                                 |
-
-### Examples
-
 1. Run data exfiltration test on mail server profile:
    ```bash
    python main.py --profile mailsvr --tests data_exfiltration
