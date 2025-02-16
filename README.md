@@ -65,6 +65,10 @@ This program is intended to run on various operating systems, including Windows 
 | websvr  | sqli              | Generates logs that reflect SQL injection attempts.                                          |
 | websvr  | xss               | Generates logs that reflect cross-site scripting attempts.                                   |
 | websvr  | badbot            | Generates logs that reflect bad bot traffic.                                                 |
+| linhost | syn_flood | Generates logs that reflect SYN flood attacks. |
+| linhost | udp_flood | Generates logs that reflect UDP flood attacks. |
+| winhost | malware | Generates logs that reflect a host connecting to a C2/malware server. |
+| winhost | phishing | Generates logs that reflect a host connecting to a phishing site. |
 
 ### Examples
 
