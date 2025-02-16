@@ -45,6 +45,8 @@ This program is intended to run on various operating systems, including Windows 
 | all      | (LINUX ONLY) Runs all benign log generation events |
 | websvr   | Simulates traffic to a mail server                 |
 | mailsvr  | Simulates traffic to an IIS web server             |
+| linhost  | Simulates traffic to a Linux host                  |
+| winhost  | Simulates traffic to a Windows host                |
 
 ### Options
 
