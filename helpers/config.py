@@ -53,3 +53,9 @@ PHISHING_CAMPAIGN_BODY = (
 # Win Host
 C2_DOMAIN = "guardeduppe.com"
 PHISHING_DOMAIN = "agcyber.com"
+
+# Lin Host
+VICTIM_IP = "10.10.1.22"
+PORT_TCP = 80
+PORT_UDP = 514
+DURATION = 60

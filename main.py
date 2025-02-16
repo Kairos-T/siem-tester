@@ -160,6 +160,27 @@ class WindowsHostProfile(BaseProfile):
             else:
                 log("error", f"Test '{test}' not found.")
 
+class LinuxHostProfile(BaseProfile):
+    TEST_FUNCTIONS = {
+        "syn_flood": "generate_syn_flood",
+        "udp_flood": "generate_udp_flood",
+    }
+
+    def run_benign(self):
+        log("info", "No benign traffic generation for Linux host profile.")
+
+    def run_tests(self):
+        from helpers.linhost import (
+            generate_syn_flood,
+            generate_udp_flood,
+        )
+
+        for test in self.args.tests or []:
+            function_name = self.TEST_FUNCTIONS.get(test)
+            if function_name:
+                locals()[function_name]()  # Dynamically call the test function
+            else:
+                log("error", f"Test '{test}' not found.")
 
 def main():
     args = parse_arguments()
@@ -168,6 +189,7 @@ def main():
         "mailsvr": MailServerProfile,
         "websvr": WebServerProfile,
         "winhost": WindowsHostProfile,
+        "linhost": LinuxHostProfile,
     }
 
     if not args.profile:
